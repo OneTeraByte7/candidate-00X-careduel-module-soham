@@ -35,8 +35,12 @@ export default function ProposeTopicForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white rounded shadow-md" style={{ fontFamily: 'Roboto, sans-serif' }}>
-      <h2 className="text-crimson font-poppins text-2xl mb-4">Propose a Topic</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto p-6 bg-white rounded shadow-md"
+      style={{ fontFamily: 'Roboto, sans-serif' }}
+    >
+      <h2 className="text-primary font-poppins text-2xl mb-4">Propose a Topic</h2>
 
       <label className="block mb-2 font-semibold" htmlFor="topic">Topic</label>
       <input
@@ -61,13 +65,14 @@ export default function ProposeTopicForm() {
       <button
         type="submit"
         disabled={loading}
-        className="bg-crimson text-white font-semibold py-2 px-4 rounded hover:bg-red-700 transition"
+        className="mt-4 px-4 py-2 font-semibold rounded border border-primary text-primary hover:bg-primary hover:text-white transition"
       >
         {loading ? 'Submitting...' : 'Submit'}
       </button>
 
+
       {message && (
-        <p className={`mt-4 ${message.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+        <p className={`mt-4 ${message.type === 'success' ? 'text-green-600' : 'text-primary'}`}>
           {message.text}
         </p>
       )}

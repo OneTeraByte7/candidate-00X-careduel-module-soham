@@ -14,7 +14,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 export default function PollResults() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [fill, setFill] = useState(false); // <- new
+  const [fill, setFill] = useState(false);
 
   const fetchResults = async () => {
     setLoading(true);
@@ -33,7 +33,6 @@ export default function PollResults() {
   }, []);
 
   useEffect(() => {
-    // trigger fill animation after render
     const timeout = setTimeout(() => setFill(true), 100);
     return () => clearTimeout(timeout);
   }, [results]);
@@ -46,7 +45,7 @@ export default function PollResults() {
       {
         label: 'Votes',
         data: results.map((r) => r.votes),
-        backgroundColor: '#3949AB',
+        backgroundColor: '#3949AB', // accent color
         borderRadius: 4,
       },
     ],
@@ -57,7 +56,7 @@ export default function PollResults() {
       className="max-w-3xl mx-auto p-6 bg-white rounded shadow-md"
       style={{ fontFamily: 'Roboto, sans-serif' }}
     >
-      <h2 className="text-indigo-700 font-poppins text-2xl mb-4">Polling Results</h2>
+      <h2 className="text-primary font-poppins text-2xl mb-4">Polling Results</h2>
 
       {loading ? (
         <p>Loading...</p>
@@ -74,7 +73,7 @@ export default function PollResults() {
                   </div>
                   <div className="w-full bg-gray-200 rounded h-5 overflow-hidden">
                     <div
-                      className={`bg-indigo-600 h-5 rounded transition-all duration-700 ease-out`}
+                      className={`bg-accent h-5 rounded transition-all duration-700 ease-out`}
                       style={{
                         width: fill ? `${percent}%` : '0%',
                       }}
@@ -85,30 +84,33 @@ export default function PollResults() {
             })}
           </div>
 
-          <Bar data={chartData} options={{
-            responsive: true,
-            animation: {
-              duration: 1000,
-              easing: 'easeOutQuart',
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
+          <Bar
+            data={chartData}
+            options={{
+              responsive: true,
+              animation: {
+                duration: 1000,
+                easing: 'easeOutQuart',
               },
-            },
-            plugins: {
-              legend: {
-                display: false,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
               },
-            },
-          }} />
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            }}
+          />
 
           <button
             onClick={() => {
-              setFill(false); // reset animation
+              setFill(false);
               fetchResults();
             }}
-            className="mt-6 px-4 py-2 font-semibold rounded border border-indigo-700 text-indigo-700 hover:bg-indigo-700 hover:text-white transition"
+            className="mt-6 px-4 py-2 font-semibold rounded border border-accent text-accent hover:bg-accent hover:text-white transition"
           >
             Refresh
           </button>

@@ -15,13 +15,13 @@ function App() {
       <main className="max-w-4xl mx-auto px-4 py-8 space-y-12">
         {/* Module 3: Propose a Topic */}
         <section className="p-6 bg-gray-100 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4 text-indigo-700">Propose a New Duel Topic</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-black-700">Propose a New Duel Topic</h2>
           <ProposeTopicForm />
         </section>
 
         {/* Module 4: View Poll Results */}
         <section className="p-6 bg-gray-100 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4 text-indigo-700">Live Poll Results</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-black-700">Live Poll Results</h2>
           <PollResults />
         </section>
       </main>
