@@ -7,9 +7,25 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigin = process.env.FRONTEND_URL || '*';
+// Multiple allowed origins (local + deployed frontend)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://candidate-00-x-careduel-module-soha.vercel.app',
+];
 
-app.use(cors({ origin: allowedOrigin }));
+// CORS config
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST'],
+  credentials: true,
+}));
+
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
@@ -36,14 +52,11 @@ app.post('/api/suggest-topic', async (req, res) => {
       return res.status(500).json({ error: 'MailerLite API key or Group ID not configured' });
     }
 
-    // Create subscriber and assign group at the same time
     const subscriberResponse = await axios.post(
       'https://connect.mailerlite.com/api/subscribers',
       {
         email: userEmail,
-        fields: {
-          topic_suggestion: topic,
-        },
+        fields: { topic_suggestion: topic },
         groups: [MAILERLITE_GROUP_ID],
       },
       {
@@ -58,14 +71,15 @@ app.post('/api/suggest-topic', async (req, res) => {
   } catch (error) {
     if (error.response) {
       console.error('MailerLite API error response:', error.response.status, error.response.data);
-      return res.status(error.response.status).json({ error: error.response.data || 'MailerLite API error' });
+      return res.status(error.response.status).json({
+        error: error.response.data?.error?.message || 'MailerLite API error',
+      });
     } else {
       console.error('MailerLite API error:', error.message);
       return res.status(500).json({ error: 'Failed to suggest topic' });
     }
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
