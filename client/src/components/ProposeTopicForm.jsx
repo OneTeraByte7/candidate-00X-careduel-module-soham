@@ -12,7 +12,8 @@ export default function ProposeTopicForm() {
     setMessage(null);
 
     try {
-      const res = await fetch('http://localhost:5000/api/suggest-topic', {
+      const res = await fetch('https://careduel-v2ta.onrender.com/api/suggest-topic', {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic, userEmail }),
