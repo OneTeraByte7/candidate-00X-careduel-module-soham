@@ -27,7 +27,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="text-center py-4 text-sm text-gray-500 border-t mt-12">
+      <footer className="bg-primary text-center py-4 text-sm text-white-500 border-t mt-12">
         &copy; {new Date().getFullYear()} CareDuel.com. All rights reserved.
       </footer>
     </div>

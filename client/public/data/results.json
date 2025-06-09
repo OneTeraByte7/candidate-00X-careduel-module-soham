@@ -1,5 +1,12 @@
 [
   { "topic": "Clean Water", "votes": 120 },
   { "topic": "Education for All", "votes": 90 },
-  { "topic": "Climate Action", "votes": 60 }
+  { "topic": "Climate Action", "votes": 60 },
+  { "topic": "Mental Health Awareness", "votes": 75 },
+  { "topic": "Animal Welfare", "votes": 45 },
+  { "topic": "Zero Hunger", "votes": 100 },
+  { "topic": "Affordable Healthcare", "votes": 80 },
+  { "topic": "Gender Equality", "votes": 65 },
+  { "topic": "Renewable Energy", "votes": 110 },
+  { "topic": "Disaster Relief", "votes": 55 }
 ]
